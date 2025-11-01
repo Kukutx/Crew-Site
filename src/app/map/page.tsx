@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import Image from "next/image";
 import Script from "next/script";
 import { useEffect, useMemo, useRef, useState } from "react";
@@ -336,12 +337,12 @@ export default function MapPage() {
       <div ref={mapContainerRef} className={styles.mapCanvas} aria-hidden />
 
       <header className={styles.topBar}>
-        <div className={styles.brand}>
+        <Link href="/" className={styles.brand}>
           <div className={styles.brandBadge} aria-hidden>
             <span />
           </div>
           <span className={styles.brandName}>Crew</span>
-        </div>
+        </Link>
 
         <div className={styles.searchBar}>
           <span className={styles.searchIcon} aria-hidden>
