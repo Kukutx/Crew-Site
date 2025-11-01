@@ -426,9 +426,12 @@ export default function MapPage() {
                     <div className={styles.cardBody}>
                       <div className={styles.cardTitleRow}>
                         <h2>{trail.name}</h2>
-                        <span className={styles.rating}>
-                          ⭐ {trail.rating.toFixed(1)}
-                          <span className={styles.reviewCount}>({trail.reviews})</span>
+                        <span
+                          className={styles.rating}
+                          aria-label={`${trail.reviews} persone lo hanno aggiunto ai preferiti`}
+                        >
+                          <span aria-hidden>⭐</span>
+                          <span className={styles.favoriteCount}>{trail.reviews}</span>
                         </span>
                       </div>
                       <p className={styles.cardMeta}>{trail.location}</p>
