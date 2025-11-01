@@ -76,6 +76,7 @@ export default function Home() {
             <a href="#features">功能</a>
             <a href="#screens">截图</a>
             <a href="#download">下载</a>
+            <Link href="/map">地图</Link>
           </div>
         </nav>
 
