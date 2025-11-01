@@ -29,9 +29,11 @@ type GoogleMap = {
 type GooglePolyline = {
   setMap: (map: GoogleMap | null) => void;
   setOptions: (options: {
+    path?: LatLng[];
     strokeColor?: string;
     strokeOpacity?: number;
     strokeWeight?: number;
+    map?: GoogleMap | null;
   }) => void;
 };
 
@@ -338,7 +340,7 @@ export default function MapPage() {
           <div className={styles.brandBadge} aria-hidden>
             <span />
           </div>
-          <span className={styles.brandName}>AllTrails</span>
+          <span className={styles.brandName}>Crew</span>
         </div>
 
         <div className={styles.searchBar}>
@@ -351,22 +353,6 @@ export default function MapPage() {
             aria-label="Cerca"
           />
         </div>
-
-        <nav className={styles.navLinks} aria-label="Principale">
-          <button type="button" className={styles.navLink}>
-            Esplora
-          </button>
-          <button type="button" className={styles.navLink}>
-            Piani
-          </button>
-          <button type="button" className={styles.navLink}>
-            Community
-          </button>
-          <button type="button" className={styles.navLink}>
-            Crea mappa
-          </button>
-        </nav>
-
         <div className={styles.accountActions}>
           <button type="button" className={styles.secondaryButton}>
             Accedi
@@ -508,3 +494,7 @@ export default function MapPage() {
     </div>
   );
 }
+
+
+
+console.log("Google Maps API Key:", process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY);
