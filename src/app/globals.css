@@ -22,6 +22,7 @@ body {
   color: var(--fg);
   font-family: var(--font-geist-sans), -apple-system, BlinkMacSystemFont, "Segoe UI",
     Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji", sans-serif;
+  overflow-x: hidden;
 }
 
 a {
@@ -67,6 +68,33 @@ a {
   flex-wrap: wrap;
   color: var(--muted);
   font-size: 14px;
+}
+
+.links a {
+  color: inherit;
+}
+
+.auth-links {
+  align-items: center;
+  gap: 12px;
+}
+
+.register-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 18px;
+  border-radius: 999px;
+  background: var(--brand);
+  color: #101014;
+  font-weight: 600;
+  border: none;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.register-link:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(255, 106, 0, 0.35);
 }
 
 .hero {
@@ -198,6 +226,56 @@ a {
   flex-direction: column;
   gap: 16px;
   line-height: 1.7;
+}
+
+@media (max-width: 1024px) {
+  .container {
+    padding: 20px;
+  }
+
+  .hero {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .hero .cta {
+    justify-content: center;
+  }
+
+  .hero .card {
+    max-width: 380px;
+    margin: 0 auto;
+  }
+
+  .features {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .container {
+    padding: 16px;
+  }
+
+  .nav {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .hero h1 {
+    font-size: 32px;
+  }
+
+  .features,
+  .grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .footer {
+    flex-direction: column;
+    align-items: flex-start;
+  }
 }
 
 .legal h1 {

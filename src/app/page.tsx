@@ -72,10 +72,11 @@ export default function Home() {
             <div className="logo-badge" aria-hidden="true" />
             <span className="logo-text">Crew</span>
           </div>
-          <div className="links">
-            <a href="#features">功能</a>
-            <a href="#screens">截图</a>
-            <a href="#download">下载</a>
+          <div className="links auth-links">
+            <a href="#login">Accedi</a>
+            <a className="register-link" href="#download">
+              Registrazione
+            </a>
           </div>
         </nav>
 
