@@ -212,6 +212,7 @@ export default function MapPage() {
   const [activeTrailId, setActiveTrailId] = useState(TRAILS[0]?.id);
   const [scriptError, setScriptError] = useState<string | null>(null);
   const [mapType, setMapType] = useState<GoogleMapTypeId>("roadmap");
+  const [isSidebarExpanded, setIsSidebarExpanded] = useState(true);
 
   const apiKey = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY;
 
@@ -332,6 +333,10 @@ export default function MapPage() {
     setScriptError("Impossibile caricare Google Maps in questo momento.");
   };
 
+  const sidebarClassName = isSidebarExpanded
+    ? styles.sidebar
+    : `${styles.sidebar} ${styles.sidebarCollapsed}`;
+
   return (
     <div className={styles.page}>
       <div ref={mapContainerRef} className={styles.mapCanvas} aria-hidden />
@@ -371,86 +376,79 @@ export default function MapPage() {
         </div>
       </header>
 
-      <aside className={styles.sidebar}>
-        <div className={styles.sidebarHeader}>
+      <aside className={sidebarClassName}>
+        <button
+          type="button"
+          className={styles.sidebarToggle}
+          onClick={() => setIsSidebarExpanded((previous) => !previous)}
+          aria-expanded={isSidebarExpanded}
+        >
           <div>
             <p className={styles.kicker}>Esplora sentieri</p>
             <p className={styles.subtle}>{TRAILS.length} sentieri</p>
           </div>
-          <button type="button" className={styles.shareButton}>
-            Condividi
-          </button>
-        </div>
+          <span className={styles.toggleIcon} aria-hidden>
+            {isSidebarExpanded ? "▾" : "▸"}
+          </span>
+        </button>
 
-        <label className={styles.toggleRow}>
-          <input type="checkbox" checked readOnly />
-          <span>Contemplazione religiosa</span>
-        </label>
+        {isSidebarExpanded ? (
+          <div className={styles.sidebarContent}>
+            <div className={styles.filterAction}>
+              <button type="button" className={styles.filterButtonPrimary}>
+                Filtri
+              </button>
+            </div>
 
-        <div className={styles.filterRow}>
-          {[
-            "Distanza",
-            "Difficoltà",
-            "Lunghezza",
-            "Tempo",
-            "Altitudine",
-          ].map((label) => (
-            <button key={label} type="button" className={styles.filterButton}>
-              {label}
-            </button>
-          ))}
-          <button type="button" className={styles.moreFilters}>
-            Altri filtri
-          </button>
-        </div>
-
-        <div className={styles.cards}>
-          {TRAILS.map((trail) => {
-            const isActive = trail.id === activeTrailId;
-            return (
-              <article
-                key={trail.id}
-                id={`trail-${trail.id}`}
-                className={isActive ? styles.cardActive : styles.card}
-                onMouseEnter={() => handleTrailSelect(trail)}
-                onFocus={() => handleTrailSelect(trail)}
-                onClick={() => handleTrailSelect(trail)}
-                role="button"
-                tabIndex={0}
-              >
-                <div className={styles.cardMedia}>
-                  <Image
-                    src={trail.coverImage}
-                    alt={trail.name}
-                    fill
-                    sizes="(max-width: 768px) 100vw, 320px"
-                    priority={trail.id === TRAILS[0].id}
-                  />
-                </div>
-                <div className={styles.cardBody}>
-                  <div className={styles.cardTitleRow}>
-                    <h2>{trail.name}</h2>
-                    <span className={styles.rating}>
-                      ⭐ {trail.rating.toFixed(1)}
-                      <span className={styles.reviewCount}>({trail.reviews})</span>
-                    </span>
-                  </div>
-                  <p className={styles.cardMeta}>{trail.location}</p>
-                  <div className={styles.cardChips}>
-                    <span>{trail.length.toFixed(1)} km</span>
-                    <span>{trail.difficulty}</span>
-                    <span>{trail.duration}</span>
-                  </div>
-                  <ul className={styles.cardHighlights}>
-                    {trail.highlights.map((highlight) => (
-                      <li key={highlight}>{highlight}</li>
-                    ))}
-                  </ul>
-                </div>
-              </article>
-            );
-          })}
-        </div>
+            <div className={styles.cards}>
+              {TRAILS.map((trail) => {
+                const isActive = trail.id === activeTrailId;
+                return (
+                  <article
+                    key={trail.id}
+                    id={`trail-${trail.id}`}
+                    className={isActive ? styles.cardActive : styles.card}
+                    onMouseEnter={() => handleTrailSelect(trail)}
+                    onFocus={() => handleTrailSelect(trail)}
+                    onClick={() => handleTrailSelect(trail)}
+                    role="button"
+                    tabIndex={0}
+                  >
+                    <div className={styles.cardMedia}>
+                      <Image
+                        src={trail.coverImage}
+                        alt={trail.name}
+                        fill
+                        sizes="(max-width: 768px) 100vw, 320px"
+                        priority={trail.id === TRAILS[0].id}
+                      />
+                    </div>
+                    <div className={styles.cardBody}>
+                      <div className={styles.cardTitleRow}>
+                        <h2>{trail.name}</h2>
+                        <span className={styles.rating}>
+                          ⭐ {trail.rating.toFixed(1)}
+                          <span className={styles.reviewCount}>({trail.reviews})</span>
+                        </span>
+                      </div>
+                      <p className={styles.cardMeta}>{trail.location}</p>
+                      <div className={styles.cardChips}>
+                        <span>{trail.length.toFixed(1)} km</span>
+                        <span>{trail.difficulty}</span>
+                        <span>{trail.duration}</span>
+                      </div>
+                      <ul className={styles.cardHighlights}>
+                        {trail.highlights.map((highlight) => (
+                          <li key={highlight}>{highlight}</li>
+                        ))}
+                      </ul>
+                    </div>
+                  </article>
+                );
+              })}
+            </div>
+          </div>
+        ) : null}
       </aside>
 
       <div className={styles.mapControls}>
@@ -501,7 +499,3 @@ export default function MapPage() {
     </div>
   );
 }
-
-
-
-console.log("Google Maps API Key:", process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY);
