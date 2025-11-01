@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import Script from "next/script";
 import { useEffect, useState } from "react";
@@ -69,7 +70,14 @@ export default function Home() {
       <div className="container">
         <nav className="nav">
           <div className="logo">
-            <div className="logo-badge" aria-hidden="true" />
+            <Image
+              src="/images/icons/logo.png"
+              alt="Crew logo"
+              width={40}
+              height={40}
+              className="logo-image"
+              priority
+            />
             <span className="logo-text">Crew</span>
           </div>
           <div className="links">

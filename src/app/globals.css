@@ -50,15 +50,15 @@ a {
   letter-spacing: 0.2px;
 }
 
-.logo-text {
-  font-weight: inherit;
+.logo-image {
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  object-fit: contain;
 }
 
-.logo-badge {
-  width: 36px;
-  height: 36px;
-  border-radius: 10px;
-  background: linear-gradient(135deg, var(--brand), #ffb84d);
+.logo-text {
+  font-weight: inherit;
 }
 
 .links {
