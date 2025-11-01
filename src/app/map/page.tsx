@@ -85,16 +85,20 @@ type Trail = {
 const TRAILS: Trail[] = [
   {
     id: "duomo-panorama",
-    name: "Milano: Duomo → Torre Branca",
+    name: "Milano in auto: Duomo → Torre Branca",
     location: "Milano, Lombardia",
     rating: 4.7,
     reviews: 523,
-    length: 6.4,
+    length: 9.8,
     difficulty: "Facile",
-    duration: "1 h 55 min",
+    duration: "35 min",
     coverImage:
       "https://images.unsplash.com/photo-1532453288672-3a27e9be9efd?auto=format&fit=crop&w=800&q=80",
-    highlights: ["Cultura", "Adatto alle famiglie", "Pavimentato"],
+    highlights: [
+      "Percorso self-drive",
+      "Soste culturali",
+      "Parcheggi consigliati",
+    ],
     path: [
       { lat: 45.464211, lng: 9.191383 },
       { lat: 45.46619, lng: 9.18637 },
@@ -112,16 +116,20 @@ const TRAILS: Trail[] = [
   },
   {
     id: "navigli-serale",
-    name: "Navigli serale e Darsena",
+    name: "Navigli al tramonto in auto",
     location: "Milano, Lombardia",
     rating: 4.6,
     reviews: 312,
-    length: 4.2,
+    length: 12.4,
     difficulty: "Moderato",
-    duration: "1 h 20 min",
+    duration: "42 min",
     coverImage:
       "https://images.unsplash.com/photo-1505150892987-424388e40f36?auto=format&fit=crop&w=800&q=80",
-    highlights: ["Tramonto", "Pet friendly", "Canali"],
+    highlights: [
+      "Scorci sui canali",
+      "Soste aperitivo",
+      "Percorso self-drive",
+    ],
     path: [
       { lat: 45.451386, lng: 9.170231 },
       { lat: 45.45282, lng: 9.173615 },
@@ -139,16 +147,20 @@ const TRAILS: Trail[] = [
   },
   {
     id: "parco-sempione-loop",
-    name: "Loop Parco Sempione",
+    name: "Loop in auto Parco Sempione",
     location: "Milano, Lombardia",
     rating: 4.9,
     reviews: 671,
-    length: 3.3,
+    length: 7.6,
     difficulty: "Facile",
-    duration: "58 min",
+    duration: "28 min",
     coverImage:
       "https://images.unsplash.com/photo-1548585742-1df49d0d35ad?auto=format&fit=crop&w=800&q=80",
-    highlights: ["Ombreggiato", "Accessibile", "Area picnic"],
+    highlights: [
+      "Parco dal finestrino",
+      "Aree sosta verdi",
+      "Percorso self-drive",
+    ],
     path: [
       { lat: 45.472198, lng: 9.182464 },
       { lat: 45.472822, lng: 9.178356 },
@@ -165,16 +177,20 @@ const TRAILS: Trail[] = [
   },
   {
     id: "martesana-greenway",
-    name: "Greenway Martesana",
+    name: "Greenway Martesana in auto",
     location: "Crescenzago, Lombardia",
     rating: 4.5,
     reviews: 289,
-    length: 12.1,
+    length: 24.5,
     difficulty: "Moderato",
-    duration: "3 h 05 min",
+    duration: "1 h 10 min",
     coverImage:
       "https://images.unsplash.com/photo-1505761671935-60b3a7427bad?auto=format&fit=crop&w=800&q=80",
-    highlights: ["Fiume", "Bici", "Rientro in metro"],
+    highlights: [
+      "Itinerario lungo fiume",
+      "Suggerimenti ricarica EV",
+      "Percorso self-drive",
+    ],
     path: [
       { lat: 45.513368, lng: 9.238247 },
       { lat: 45.508052, lng: 9.22261 },
@@ -362,7 +378,7 @@ export default function MapPage() {
           </span>
           <input
             type="search"
-            placeholder="Cerca sentieri, parchi o città"
+            placeholder="Cerca tour self-drive, itinerari o città"
             aria-label="Cerca"
           />
         </div>
@@ -384,8 +400,8 @@ export default function MapPage() {
           aria-expanded={isSidebarExpanded}
         >
           <div>
-            <p className={styles.kicker}>Esplora sentieri</p>
-            <p className={styles.subtle}>{TRAILS.length} sentieri</p>
+            <p className={styles.kicker}>Esplora tour in auto</p>
+            <p className={styles.subtle}>{TRAILS.length} tour self-drive</p>
           </div>
           <span className={styles.toggleIcon} aria-hidden>
             {isSidebarExpanded ? "▾" : "▸"}
@@ -481,7 +497,8 @@ export default function MapPage() {
 
       {!apiKey && !scriptError ? (
         <div className={styles.mapStatus} role="status">
-          Fornisci una Google Maps API key per visualizzare la mappa.
+          Fornisci una Google Maps API key per visualizzare i tour self-drive sulla
+          mappa.
         </div>
       ) : null}
 
