@@ -339,7 +339,14 @@ export default function MapPage() {
       <header className={styles.topBar}>
         <Link href="/" className={styles.brand}>
           <div className={styles.brandBadge} aria-hidden>
-            <span />
+            <Image
+              src="/images/icons/app_icon.png"
+              alt="Crew logo"
+              width={40}
+              height={40}
+              className="logo-image"
+              priority
+            />
           </div>
           <span className={styles.brandName}>Crew</span>
         </Link>
@@ -368,7 +375,6 @@ export default function MapPage() {
         <div className={styles.sidebarHeader}>
           <div>
             <p className={styles.kicker}>Esplora sentieri</p>
-            <h1>Milano, Lombardia</h1>
             <p className={styles.subtle}>{TRAILS.length} sentieri</p>
           </div>
           <button type="button" className={styles.shareButton}>
