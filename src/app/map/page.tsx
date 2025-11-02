@@ -75,7 +75,7 @@ type Trail = {
   rating: number;
   reviews: number;
   length: number;
-  difficulty: "Facile" | "Moderato" | "Impegnativo";
+  difficulty: "Easy" | "Moderate" | "Challenging";
   duration: string;
   coverImage: string;
   highlights: string[];
@@ -85,16 +85,16 @@ type Trail = {
 const TRAILS: Trail[] = [
   {
     id: "duomo-panorama",
-    name: "Milano: Duomo → Torre Branca",
-    location: "Milano, Lombardia",
+    name: "Milan by Car: Duomo → Torre Branca",
+    location: "Milan, Lombardy",
     rating: 4.7,
     reviews: 523,
-    length: 6.4,
-    difficulty: "Facile",
-    duration: "1 h 55 min",
+    length: 9.8,
+    difficulty: "Easy",
+    duration: "35 min",
     coverImage:
       "https://images.unsplash.com/photo-1532453288672-3a27e9be9efd?auto=format&fit=crop&w=800&q=80",
-    highlights: ["Cultura", "Adatto alle famiglie", "Pavimentato"],
+    highlights: ["Self-drive route", "Cultural stopovers", "Recommended parking"],
     path: [
       { lat: 45.464211, lng: 9.191383 },
       { lat: 45.46619, lng: 9.18637 },
@@ -112,16 +112,16 @@ const TRAILS: Trail[] = [
   },
   {
     id: "navigli-serale",
-    name: "Navigli serale e Darsena",
-    location: "Milano, Lombardia",
+    name: "Navigli Sunset Drive",
+    location: "Milan, Lombardy",
     rating: 4.6,
     reviews: 312,
-    length: 4.2,
-    difficulty: "Moderato",
-    duration: "1 h 20 min",
+    length: 12.4,
+    difficulty: "Moderate",
+    duration: "42 min",
     coverImage:
       "https://images.unsplash.com/photo-1505150892987-424388e40f36?auto=format&fit=crop&w=800&q=80",
-    highlights: ["Tramonto", "Pet friendly", "Canali"],
+    highlights: ["Canal viewpoints", "Aperitivo stops", "Self-drive route"],
     path: [
       { lat: 45.451386, lng: 9.170231 },
       { lat: 45.45282, lng: 9.173615 },
@@ -139,16 +139,16 @@ const TRAILS: Trail[] = [
   },
   {
     id: "parco-sempione-loop",
-    name: "Loop Parco Sempione",
-    location: "Milano, Lombardia",
+    name: "Parco Sempione Scenic Loop",
+    location: "Milan, Lombardy",
     rating: 4.9,
     reviews: 671,
-    length: 3.3,
-    difficulty: "Facile",
-    duration: "58 min",
+    length: 7.6,
+    difficulty: "Easy",
+    duration: "28 min",
     coverImage:
       "https://images.unsplash.com/photo-1548585742-1df49d0d35ad?auto=format&fit=crop&w=800&q=80",
-    highlights: ["Ombreggiato", "Accessibile", "Area picnic"],
+    highlights: ["Park views from the car", "Green rest areas", "Self-drive route"],
     path: [
       { lat: 45.472198, lng: 9.182464 },
       { lat: 45.472822, lng: 9.178356 },
@@ -165,16 +165,16 @@ const TRAILS: Trail[] = [
   },
   {
     id: "martesana-greenway",
-    name: "Greenway Martesana",
-    location: "Crescenzago, Lombardia",
+    name: "Martesana Greenway Drive",
+    location: "Crescenzago, Lombardy",
     rating: 4.5,
     reviews: 289,
-    length: 12.1,
-    difficulty: "Moderato",
-    duration: "3 h 05 min",
+    length: 24.5,
+    difficulty: "Moderate",
+    duration: "1 h 10 min",
     coverImage:
       "https://images.unsplash.com/photo-1505761671935-60b3a7427bad?auto=format&fit=crop&w=800&q=80",
-    highlights: ["Fiume", "Bici", "Rientro in metro"],
+    highlights: ["Riverside itinerary", "EV charging tips", "Self-drive route"],
     path: [
       { lat: 45.513368, lng: 9.238247 },
       { lat: 45.508052, lng: 9.22261 },
@@ -322,7 +322,7 @@ export default function MapPage() {
 
   const handleScriptReady = () => {
     if (!window.google) {
-      setScriptError("Impossibile caricare Google Maps in questo momento.");
+      setScriptError("Unable to load Google Maps right now.");
       return;
     }
 
@@ -330,7 +330,7 @@ export default function MapPage() {
   };
 
   const handleScriptError = () => {
-    setScriptError("Impossibile caricare Google Maps in questo momento.");
+    setScriptError("Unable to load Google Maps right now.");
   };
 
   const sidebarClassName = isSidebarExpanded
@@ -362,16 +362,16 @@ export default function MapPage() {
           </span>
           <input
             type="search"
-            placeholder="Cerca sentieri, parchi o città"
-            aria-label="Cerca"
+            placeholder="Search self-drive tours, itineraries, or cities"
+            aria-label="Search"
           />
         </div>
         <div className={styles.accountActions}>
           <button type="button" className={styles.secondaryButton}>
-            Accedi
+            Sign in
           </button>
           <button type="button" className={styles.primaryButton}>
-            Registrati
+            Create account
           </button>
         </div>
       </header>
@@ -384,8 +384,8 @@ export default function MapPage() {
           aria-expanded={isSidebarExpanded}
         >
           <div>
-            <p className={styles.kicker}>Esplora sentieri</p>
-            <p className={styles.subtle}>{TRAILS.length} sentieri</p>
+            <p className={styles.kicker}>Explore self-drive tours</p>
+            <p className={styles.subtle}>{TRAILS.length} self-drive tours</p>
           </div>
           <span className={styles.toggleIcon} aria-hidden>
             {isSidebarExpanded ? "▾" : "▸"}
@@ -396,7 +396,7 @@ export default function MapPage() {
           <div className={styles.sidebarContent}>
             <div className={styles.filterAction}>
               <button type="button" className={styles.filterButtonPrimary}>
-                Filtri
+                Filters
               </button>
             </div>
 
@@ -428,7 +428,7 @@ export default function MapPage() {
                         <h2>{trail.name}</h2>
                         <span
                           className={styles.rating}
-                          aria-label={`${trail.reviews} persone lo hanno aggiunto ai preferiti`}
+                          aria-label={`${trail.reviews} people saved this`}
                         >
                           <span aria-hidden>⭐</span>
                           <span className={styles.favoriteCount}>{trail.reviews}</span>
@@ -458,7 +458,7 @@ export default function MapPage() {
         <div className={styles.mapControlGroup}>
           {(
             [
-              { id: "roadmap" as GoogleMapTypeId, label: "Mappa" },
+              { id: "roadmap" as GoogleMapTypeId, label: "Map" },
               { id: "satellite" as GoogleMapTypeId, label: "Satellite" },
             ] as const
           ).map(({ id, label }) => (
@@ -481,7 +481,7 @@ export default function MapPage() {
 
       {!apiKey && !scriptError ? (
         <div className={styles.mapStatus} role="status">
-          Fornisci una Google Maps API key per visualizzare la mappa.
+          Add a Google Maps API key to display self-drive tours on the map.
         </div>
       ) : null}
 
